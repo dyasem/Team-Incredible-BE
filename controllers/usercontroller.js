@@ -47,7 +47,11 @@ exports.login = (req, res) => {
   ).then((response) => {
     const { token } = response.data;
     res.cookie('auth', token);
+<<<<<<< HEAD
     return res.redirect(`/dashboard?token=${token}`);
+=======
+    res.redirect('/dashboard');
+>>>>>>> 2a515409b17260cc56f2fe56b4615cd267dd6e43
   }).catch((err) => {
     res.render('Pages/Login', {
       error: err.response ? err.response.data : '',
@@ -78,6 +82,7 @@ exports.googleauth = (req, res) => {
 
 exports.googlecallback = (req, res) => {
   const { code } = req.query;
+  if(!code) return res.redirect('/login');
   res.cookie('auth', code);
   res.redirect('/dashboard');
 };
